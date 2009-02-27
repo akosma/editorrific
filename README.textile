@@ -1,0 +1,14 @@
+h1. Editorrific
+
+*Version:* 1.0<br/>
+*Author:* Adrian Kosmaczewski<br/>
+*Date:* February 27th, 2009<br/>
+*Programming Languages:* Objective-C<br/>
+*Tools:* Xcode<br/>
+*Platforms:* Mac OS X Leopard 10.5.6, iPhone OS 2.0+<br/>
+*Repository:* Github<br/>
+*License:* None, public domain, whatever you want :)
+
+This project features a simple editor similar to the one used in the "Twitterriffic iPhone application":http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=284540316&mt=8.
+
+!http://kosmaczewski.net/wp-content/uploads/2009/02/twitterriffic-200x300.png!
