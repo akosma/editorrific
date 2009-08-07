@@ -3,7 +3,7 @@
 //  EditorrificView
 //
 //  Created by Adrian on 2/27/09.
-//  Copyright __MyCompanyName__ 2009. All rights reserved.
+//  Copyright akosma software 2009. All rights reserved.
 //
 
 #import "AppDelegatrrific.h"
@@ -13,14 +13,14 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {
-    [window addSubview:controller.view];
-    [window makeKeyAndVisible];
+    [_window addSubview:_controller.view];
+    [_window makeKeyAndVisible];
 }
 
 - (void)dealloc 
 {
-    [controller release];
-    [window release];
+    [_controller release];
+    [_window release];
     [super dealloc];
 }
 

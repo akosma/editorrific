@@ -3,7 +3,7 @@
 //  EditorrificView
 //
 //  Created by Adrian on 2/27/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 akosma software. All rights reserved.
 //
 
 #import "Controller.h"
@@ -15,11 +15,11 @@
 
 - (void)viewDidLoad 
 {
-    editorView.frame = CGRectMake(0.0, 128.0, 320.0, 116.0);
-    hidingTransformation = CGAffineTransformMakeTranslation(0.0, 350.0);    
-    editorView.transform = hidingTransformation;
-    [self.view addSubview:editorView];
-    oldTextHeight = 0.0;
+    _editorView.frame = CGRectMake(0.0, 128.0, 320.0, 116.0);
+    _hidingTransformation = CGAffineTransformMakeTranslation(0.0, 350.0);    
+    _editorView.transform = _hidingTransformation;
+    [self.view addSubview:_editorView];
+    _oldTextHeight = 0.0;
 }
 
 - (void)dealloc 
@@ -32,51 +32,56 @@
 
 - (IBAction)edit:(id)sender
 {
-    [editorTextView becomeFirstResponder];
-    editorTextView.text = blockedTextView.text;
+    [_editorTextView becomeFirstResponder];
+    _editorTextView.text = _blockedTextView.text;
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.3];
-    editorView.transform = CGAffineTransformIdentity;
+    _editorView.transform = CGAffineTransformIdentity;
 	[UIView commitAnimations];
 }
 
 - (IBAction)cancel:(id)sender
 {
-    [editorTextView resignFirstResponder];
+    [_editorTextView resignFirstResponder];
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.3];
-    editorView.transform = hidingTransformation;
+    _editorView.transform = _hidingTransformation;
 	[UIView commitAnimations];    
 }
 
 - (IBAction)done:(id)sender
 {
     [self cancel:nil];
-    blockedTextView.text = editorTextView.text;
+    _blockedTextView.text = _editorTextView.text;
     [self clear:nil];
 }
 
 - (IBAction)clear:(id)sender
 {
-    editorTextView.text = @"";
+    _editorTextView.text = @"";
 }
 
 #pragma mark -
 #pragma mark UITextViewDelegate methods
 
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [self cancel:nil];
+}
+
 - (void)textViewDidChange:(UITextView *)textView
 {
     UIFont *font = [UIFont fontWithName:@"Helvetica" size:17.0];
-    struct CGSize size = [editorTextView.text sizeWithFont:font
+    struct CGSize size = [_editorTextView.text sizeWithFont:font
                           constrainedToSize:CGSizeMake(280.0, 4000) 
                           lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = (size.height == 0.0) ? 21.0 : size.height;
 
-    if (height != oldTextHeight)
+    if (height != _oldTextHeight)
     {
-        hidingTransformation = CGAffineTransformMakeTranslation(0.0, 350.0 + height);
-        editorView.frame = CGRectMake(0.0, 149.0 - height, 320.0, 95.0 + height);
-        oldTextHeight = height;
+        _hidingTransformation = CGAffineTransformMakeTranslation(0.0, 350.0 + height);
+        _editorView.frame = CGRectMake(0.0, 149.0 - height, 320.0, 95.0 + height);
+        _oldTextHeight = height;
     }
 }
 
