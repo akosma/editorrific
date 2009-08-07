@@ -76,7 +76,14 @@
                           constrainedToSize:CGSizeMake(280.0, 4000) 
                           lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = (size.height == 0.0) ? 21.0 : size.height;
-
+    
+    // This fix comes from Jack's comment #4 here
+    // http://kosmaczewski.net/2009/02/28/that-twitterriffic-editor/
+    if(height > 105.0)
+    {
+        height = 105.0;
+    }
+    
     if (height != _oldTextHeight)
     {
         _hidingTransformation = CGAffineTransformMakeTranslation(0.0, 350.0 + height);
